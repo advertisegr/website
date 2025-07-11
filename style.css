@@ -10,8 +10,8 @@
     --accent-yellow: #fbbf24;
     --text-dark: #1f2937;
     --text-light: #6b7280;
-    --bg-white: #ffffff;
-    --bg-light: #fafafa;
+    --bg-white: #F4F3F0;
+    --bg-light: #F9F9F9;
     --bg-super-light: #fdfdfd;
     --border-light: #e5e7eb;
     --shadow-light: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
@@ -227,9 +227,154 @@ section {
     line-height: 1.6;
 }
 
+/* Pricing Section */
+.pricing {
+    background: var(--bg-light);
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.pricing-card {
+    background: var(--bg-white);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: var(--shadow-light);
+    border: 2px solid var(--border-light);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.pricing-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-large);
+}
+
+.pricing-card.featured {
+    border-color: var(--primary-blue);
+    transform: scale(1.05);
+    box-shadow: var(--shadow-medium);
+}
+
+.pricing-card.featured::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary-blue);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.pricing-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.pricing-number {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.pricing-title {
+    color: var(--primary-blue);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.pricing-price {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+
+.pricing-period {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-light);
+}
+
+.pricing-content {
+    margin-bottom: 2rem;
+}
+
+.pricing-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.pricing-best-for {
+    font-size: 1rem;
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+}
+
+.pricing-features {
+    margin-bottom: 2rem;
+}
+
+.pricing-feature {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.checkmark {
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.pricing-button {
+    width: 100%;
+    padding: 1rem 2rem;
+    background: var(--primary-blue);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-medium);
+    position: relative;
+    overflow: hidden;
+}
+
+.pricing-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.pricing-button:hover::before {
+    left: 100%;
+}
+
+.pricing-button:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-large);
+}
+
 /* How It Works Section */
 .how-it-works {
-    background: var(--bg-light);
+    background: var(--bg-super-light);
 }
 
 .steps {
@@ -301,7 +446,8 @@ section {
 }
 
 .form-group input,
-.form-group textarea {
+.form-group textarea,
+.form-group select {
     width: 100%;
     padding: 1rem 1.5rem;
     border: 2px solid var(--border-light);
@@ -313,7 +459,8 @@ section {
 }
 
 .form-group input:focus,
-.form-group textarea:focus {
+.form-group textarea:focus,
+.form-group select:focus {
     outline: none;
     border-color: var(--primary-blue);
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
@@ -322,6 +469,10 @@ section {
 .form-group input::placeholder,
 .form-group textarea::placeholder {
     color: var(--text-light);
+}
+
+.form-group select {
+    cursor: pointer;
 }
 
 .submit-button {
@@ -422,6 +573,15 @@ section {
         gap: 1.5rem;
     }
     
+    .pricing-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .pricing-card.featured {
+        transform: none;
+    }
+    
     .steps {
         grid-template-columns: 1fr;
         gap: 1.5rem;
@@ -433,7 +593,8 @@ section {
     }
     
     .service-item,
-    .step {
+    .step,
+    .pricing-card {
         padding: 1.5rem;
     }
 }
@@ -452,7 +613,8 @@ section {
     }
     
     .cta-button,
-    .submit-button {
+    .submit-button,
+    .pricing-button {
         padding: 0.8rem 1.5rem;
         font-size: 1rem;
     }
@@ -466,6 +628,14 @@ section {
         height: 50px;
         font-size: 1.2rem;
     }
+    
+    .pricing-price {
+        font-size: 2rem;
+    }
+    
+    .pricing-title {
+        font-size: 1.2rem;
+    }
 }
 
 /* Accessibility */
@@ -476,15 +646,3 @@ section {
         transition-duration: 0.01ms !important;
     }
 }
-
-/* Dark mode considerations */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --bg-white: #1f2937;
-        --bg-light: #111827;
-        --bg-super-light: #374151;
-        --text-dark: #f9fafb;
-        --text-light: #d1d5db;
-        --border-light: #374151;
-    }
-} 

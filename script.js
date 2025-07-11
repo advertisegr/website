@@ -26,32 +26,29 @@ document.addEventListener('DOMContentLoaded', function() {
             const name = formData.get('name');
             const email = formData.get('email');
             const phone = formData.get('phone');
+            const package = formData.get('package');
             const message = formData.get('message');
             
-            // Basic validation
-            if (!name || !email || !phone || !message) {
-                showMessage('Please fill in all required fields.', 'error');
-                return;
-            }
+            // Create email body
+            const emailBody = `New Quote Request from advertisegr Website
+
+Name: ${name}
+Email: ${email}
+Phone: ${phone}
+Package: ${package}
+Message: ${message}
+
+---
+Sent from advertisegr website contact form`;
             
-            if (!isValidEmail(email)) {
-                showMessage('Please enter a valid email address.', 'error');
-                return;
-            }
+            // Create mailto link
+            const mailtoLink = `mailto:director@advertisegr.marketing?subject=Quote Request from ${name}&body=${encodeURIComponent(emailBody)}`;
             
-            // Simulate form submission
-            showMessage('Thank you for your message! We will get back to you soon with a customized quote.', 'success');
+            // Open email client
+            window.location.href = mailtoLink;
             
-            // Reset form
-            this.reset();
-            
-            // In a real application, you would send the data to your server here
-            console.log('Form submitted:', {
-                name,
-                email,
-                phone,
-                message
-            });
+            // Show success message
+            showMessage('Opening your email client... Please send the email to complete your request.', 'success');
         });
     }
 
@@ -70,36 +67,44 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, observerOptions);
 
-    // Observe service items and steps
-    const animatedElements = document.querySelectorAll('.service-item, .step');
+    // Observe service items, steps, and pricing cards
+    const animatedElements = document.querySelectorAll('.service-item, .step, .pricing-card');
     animatedElements.forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(20px)';
         el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(el);
     });
-
-    // Add loading state to form button
-    const submitButton = document.querySelector('.submit-button');
-    if (submitButton) {
-        submitButton.addEventListener('click', function() {
-            if (this.form.checkValidity()) {
-                this.innerHTML = 'Sending...';
-                this.disabled = true;
-                
-                setTimeout(() => {
-                    this.innerHTML = 'Send Message';
-                    this.disabled = false;
-                }, 2000);
-            }
-        });
-    }
 });
 
-// Email validation function
-function isValidEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+// Package selection function
+function selectPackage(packageType) {
+    // Smooth scroll to contact form
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+        contactSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
+    
+    // Pre-select the package in the form
+    setTimeout(() => {
+        const packageSelect = document.getElementById('package');
+        if (packageSelect) {
+            packageSelect.value = packageType;
+            packageSelect.focus();
+            
+            // Add a subtle highlight effect
+            packageSelect.style.borderColor = '#2563eb';
+            packageSelect.style.boxShadow = '0 0 0 3px rgba(37, 99, 235, 0.1)';
+            
+            setTimeout(() => {
+                packageSelect.style.borderColor = '';
+                packageSelect.style.boxShadow = '';
+            }, 2000);
+        }
+    }, 500);
 }
 
 // Show message function
@@ -153,14 +158,6 @@ function showMessage(message, type) {
     }, 5000);
 }
 
-// Add subtle parallax effect to hero section
-window.addEventListener('scroll', function() {
-    const scrolled = window.pageYOffset;
-    const hero = document.querySelector('.hero');
-    if (hero) {
-        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-    }
-});
 
 // Preload images for better performance
 function preloadImages() {
@@ -172,4 +169,4 @@ function preloadImages() {
 }
 
 // Initialize
-preloadImages(); 
+preloadImages();
