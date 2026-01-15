@@ -1,0 +1,386 @@
+/* Corona-Style Landing Page */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --split-left: #fae9b8;
+    --split-right: #042242;
+    --gold: #d4a853;
+    --gold-light: #fae9b8;
+    --dark-blue: #042242;
+    --white: #ffffff;
+    --text-light: rgba(255, 255, 255, 0.8);
+}
+
+html, body {
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: var(--split-right);
+}
+
+/* Main Layout */
+.newlanding {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+}
+
+/* Left Panel - Gold/Warm */
+.hero-panel {
+    background-color: var(--split-left);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(250, 233, 184, 0.92) 0%, rgba(212, 168, 83, 0.85) 100%);
+    z-index: 1;
+}
+
+.hero-panel > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* Scroll Down Text - Hidden */
+.scroll-text {
+    display: none;
+}
+
+/* Right Panel - Dark Blue */
+.right-panel {
+    background-color: var(--split-right);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3rem;
+    position: relative;
+}
+
+/* Logo Below Title */
+.logo-centered {
+    display: block;
+    margin: 1.5rem auto 0;
+    width: 180px;
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
+}
+
+/* Hero Content on Left */
+.hero-content-left {
+    text-align: center;
+    padding: 2rem;
+    max-width: 100%;
+}
+
+.hero-tagline {
+    font-size: 1rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--dark-blue);
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--dark-blue);
+    line-height: 1.1;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.hero-title span {
+    display: block;
+}
+
+.hero-subtitle {
+    font-size: 1rem;
+    color: var(--dark-blue);
+    opacity: 0.8;
+    margin-top: 1.5rem;
+    font-weight: 400;
+    line-height: 1.5;
+    max-width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pricing-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    font-weight: 400;
+}
+
+/* Right Panel Content */
+.compact-content {
+    max-width: 400px;
+    margin: 0 auto;
+    color: var(--white);
+    text-align: center;
+}
+
+.section-title-compact {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 1.5rem;
+}
+
+/* Pricing Card */
+.pricing-card-compact {
+    background: transparent;
+    border: none;
+    text-align: center;
+    padding: 0;
+    margin-bottom: 2rem;
+}
+
+.pricing-display {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 1rem;
+}
+
+.pricing-amount {
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+}
+
+.pricing-period-compact {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    font-weight: 400;
+}
+
+.pricing-features-mini {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.badge-feature {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--gold-light);
+    padding: 0.5rem 1.2rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Steps Row */
+.steps-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.step-item {
+    text-align: center;
+    flex: 1;
+}
+
+.step-number-small {
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    color: var(--gold);
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.step-text-small {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin: 0;
+    line-height: 1.4;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.step-connector {
+    display: none;
+}
+
+/* CTA Button */
+.cta-button-main {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    background: var(--gold);
+    color: var(--dark-blue);
+    padding: 1rem 2.5rem;
+    text-decoration: none;
+    border-radius: 0;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.cta-button-main:hover {
+    background: var(--white);
+    color: var(--dark-blue);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.cta-button-main svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Logo in hero panel */
+.logo {
+    max-width: 150px;
+    filter: none !important;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    html, body {
+        overflow: auto;
+        height: auto;
+        margin: 0;
+        padding: 0;
+    }
+
+    .newlanding {
+        flex-direction: column-reverse !important;
+        height: auto !important;
+        min-height: 100vh;
+        overflow: visible !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .hero-panel,
+    .right-panel {
+        width: 100% !important;
+        min-height: 50vh;
+        flex: none;
+    }
+
+    .right-panel {
+        padding: 2rem 1.5rem;
+        margin-top: 0 !important;
+    }
+
+    .logo-centered {
+        display: none;
+    }
+
+    .scroll-text {
+        display: none;
+    }
+
+    .hero-content-left {
+        padding: 1.5rem;
+        text-align: center;
+        max-width: 100%;
+    }
+
+    .hero-title {
+        font-size: 1.8rem;
+    }
+
+    .hero-subtitle {
+        font-size: 0.9rem;
+        max-width: 280px;
+    }
+
+    .compact-content {
+        margin: 0 auto;
+        padding: 0;
+        max-width: 100%;
+    }
+
+    .pricing-amount {
+        font-size: 3rem;
+    }
+
+    .steps-row {
+        gap: 1rem;
+        justify-content: center;
+    }
+
+    .step-number-small {
+        width: 35px;
+        height: 35px;
+        font-size: 0.8rem;
+    }
+
+    .cta-button-main {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 1.5rem;
+    }
+
+    .pricing-amount {
+        font-size: 2.5rem;
+    }
+
+    .steps-row {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .step-item {
+        flex: 0 0 30%;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}

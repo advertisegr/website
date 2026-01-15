@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(flatpak list:*)",
+      "Bash(rpm -qa:*)",
+      "Bash(echo:*)",
+      "Bash(~/.zshrc)",
+      "Bash(python3:*)",
+      "Bash(pip3 install:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nRedesign landing page with Corona-style layout and business improvements\n\n- Convert to split-screen layout \\(gold left panel, dark blue right\\)\n- Switch to Poppins font and elegant color palette\n- Add clear value proposition subtitle\n- Improve pricing section with credibility context\n- Increase font sizes for better readability\n- Center pricing display under headings\n- Remove services section for cleaner look\n- Make logo transparent\n- Update background image to newspapers/leaflets theme\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push:*)",
+      "Bash(git commit:*)"
+    ]
+  }
+}
