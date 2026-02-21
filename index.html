@@ -345,71 +345,52 @@
     </div>
   </section>
 
-  <!-- Blue CTA Section -->
-  <section class="blue-cta">
+  <!-- Contact Form Section -->
+  <section class="contact-section">
     <div class="container">
-      <div class="blue-cta-box" data-animate="fade-up">
-        <div class="blue-cta-left">
-          <h2>Ζητήστε δωρεάν προσφορά<span class="dot">.</span></h2>
-          <div class="urgency-note">
-            <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
-            Απάντηση εντός 24 ωρών
+      <div class="section-header" style="text-align:center; margin-bottom: var(--space-7);" data-animate="fade-up">
+        <h2 class="section-title">Ζητήστε δωρεάν προσφορά<span class="dot">.</span></h2>
+        <p class="section-subtitle" style="margin: 0 auto;">Συμπληρώστε τη φόρμα ή καλέστε μας. Απάντηση εντός 24 ωρών.</p>
+      </div>
+      <div class="standalone-form" data-animate="fade-up">
+        <form class="contact-form">
+          <div class="form-group">
+            <label for="name">Όνομα *</label>
+            <input type="text" id="name" name="name" placeholder="Το όνομά σας" required>
           </div>
-          <div class="contact-info">
-            <a href="tel:2103007716">
-              <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.36 11.36 0 003.58.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.36 11.36 0 00.57 3.58 1 1 0 01-.25 1.01l-2.2 2.2z"/></svg>
-              210 300 77 16
-            </a>
-            <a href="tel:6982610916">
-              <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.36 11.36 0 003.58.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.36 11.36 0 00.57 3.58 1 1 0 01-.25 1.01l-2.2 2.2z"/></svg>
-              698 261 09 16
-            </a>
-            <a href="mailto:sales@okpromo.gr">
-              <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-              sales@okpromo.gr
-            </a>
+          <div class="form-group">
+            <label for="phone">Τηλέφωνο *</label>
+            <input type="tel" id="phone" name="phone" placeholder="Το τηλέφωνό σας" required>
           </div>
-        </div>
-        <div class="blue-cta-right">
-          <form class="contact-form">
-            <div class="form-group">
-              <label for="name">Όνομα *</label>
-              <input type="text" id="name" name="name" placeholder="Το όνομά σας" required>
-            </div>
-            <div class="form-group">
-              <label for="phone">Τηλέφωνο *</label>
-              <input type="tel" id="phone" name="phone" placeholder="Το τηλέφωνό σας" required>
-            </div>
-            <div class="form-group">
-              <label for="email">Email *</label>
-              <input type="email" id="email" name="email" placeholder="Το email σας" required>
-            </div>
-            <div class="form-group">
-              <label for="business">Είδος επιχείρησης</label>
-              <input type="text" id="business" name="business" placeholder="π.χ. Εστιατόριο">
-            </div>
-            <div class="form-group full-width">
-              <label for="area">Περιοχή διανομής</label>
-              <input type="text" id="area" name="area" placeholder="π.χ. Κέντρο Αθήνας, Πειραιάς">
-            </div>
-            <div class="form-group full-width">
-              <label for="info">Πρόσθετες πληροφορίες</label>
-              <textarea id="info" name="info" placeholder="Γράψτε τυχόν πρόσθετες πληροφορίες..."></textarea>
-            </div>
-            <div class="consent-group">
-              <input type="checkbox" id="consent" name="consent">
-              <label for="consent">Συμφωνώ με την <a href="privacy.html" style="color:var(--accent);">πολιτική απορρήτου</a> και αποδέχομαι την επεξεργασία των προσωπικών μου δεδομένων.</label>
-            </div>
-            <div class="submit-group">
-              <button type="submit" class="btn-submit">Ζητήστε δωρεάν προσφορά</button>
-            </div>
-            <div class="form-privacy-note">
-              <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
-              Τα δεδομένα σας είναι ασφαλή και δεν κοινοποιούνται σε τρίτους.
-            </div>
-            <div class="form-message"></div>
-          </form>
-        </div>
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" placeholder="Το email σας" required>
+          </div>
+          <div class="form-group">
+            <label for="business">Είδος επιχείρησης</label>
+            <input type="text" id="business" name="business" placeholder="π.χ. Εστιατόριο">
+          </div>
+          <div class="form-group full-width">
+            <label for="area">Περιοχή διανομής</label>
+            <input type="text" id="area" name="area" placeholder="π.χ. Κέντρο Αθήνας, Πειραιάς">
+          </div>
+          <div class="form-group full-width">
+            <label for="info">Πρόσθετες πληροφορίες</label>
+            <textarea id="info" name="info" placeholder="Γράψτε τυχόν πρόσθετες πληροφορίες..."></textarea>
+          </div>
+          <div class="consent-group">
+            <input type="checkbox" id="consent" name="consent">
+            <label for="consent">Συμφωνώ με την <a href="privacy.html" style="color:var(--primary);">πολιτική απορρήτου</a> και αποδέχομαι την επεξεργασία των προσωπικών μου δεδομένων.</label>
+          </div>
+          <div class="submit-group">
+            <button type="submit" class="btn-submit">Ζητήστε δωρεάν προσφορά</button>
+          </div>
+          <div class="form-privacy-note">
+            <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+            Τα δεδομένα σας είναι ασφαλή και δεν κοινοποιούνται σε τρίτους.
+          </div>
+          <div class="form-message"></div>
+        </form>
       </div>
     </div>
   </section>

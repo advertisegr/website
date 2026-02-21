@@ -25,7 +25,9 @@
       "WebFetch(domain:www.clickrank.ai)",
       "WebFetch(domain:miow.gr)",
       "WebFetch(domain:portaplus.gr)",
-      "WebFetch(domain:vic.gr)"
+      "WebFetch(domain:vic.gr)",
+      "WebSearch",
+      "WebFetch(domain:www.okmarkets.gr)"
     ]
   }
 }
