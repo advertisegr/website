@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Disallow: /.history/
+Disallow: /.claude/
+Disallow: /.git/
+
+Sitemap: https://okpromo.gr/sitemap.xml

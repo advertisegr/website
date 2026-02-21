@@ -3,17 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Πελάτες - OK Promo</title>
-  <meta name="description" content="Οι πελάτες που μας εμπιστεύονται για τη διανομή των εντύπων τους.">
+  <title>Πελάτες - OK Promo | Ποιοι Μας Εμπιστεύονται</title>
+  <meta name="description" content="Εστιατόρια, φροντιστήρια, καφετέριες και πολλοί ακόμα κλάδοι εμπιστεύονται την OK Promo για τη διανομή φυλλαδίων τους στην Αττική.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://okpromo.gr/clients.html">
+
+  <meta name="geo.region" content="GR-I">
+  <meta name="geo.placename" content="Athens">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="el_GR">
+  <meta property="og:site_name" content="OK Promo">
+  <meta property="og:title" content="Πελάτες - OK Promo | Ποιοι Μας Εμπιστεύονται">
+  <meta property="og:description" content="Κλάδοι που εμπιστεύονται την OK Promo: εστιατόρια, φροντιστήρια, καφετέριες και πολλοί ακόμα.">
+  <meta property="og:url" content="https://okpromo.gr/clients.html">
+
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
   <link rel="stylesheet" href="css/style.css">
+
+  <!-- JSON-LD: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Αρχική", "item": "https://okpromo.gr/"},
+      {"@type": "ListItem", "position": 2, "name": "Πελάτες", "item": "https://okpromo.gr/clients.html"}
+    ]
+  }
+  </script>
 </head>
 <body>
+
+  <a href="#main-content" class="skip-link">Μετάβαση στο περιεχόμενο</a>
 
   <!-- Top Bar -->
   <div class="topbar">
     <div class="container">
       <div class="topbar-left">
-        <a href="contact.html">ΣΥΧΝΕΣ ΕΡΩΤΗΣΕΙΣ</a>
+        <a href="services.html#faq">ΣΥΧΝΕΣ ΕΡΩΤΗΣΕΙΣ</a>
       </div>
       <div class="topbar-right">
         <a href="tel:2103007716">
@@ -33,7 +65,7 @@
   </div>
 
   <!-- Navbar -->
-  <nav class="navbar">
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
     <div class="container">
       <a href="index.html" class="logo">OK<span>PROMO</span></a>
       <div class="nav-links">
@@ -51,8 +83,8 @@
         <a href="about.html">Ποιοι είμαστε</a>
         <a href="clients.html" class="active">Πελάτες</a>
       </div>
-      <a href="contact.html" class="btn btn-accent nav-cta">Ζητήστε προσφορά</a>
-      <button class="hamburger" aria-label="Menu">
+      <a href="contact.html" class="btn btn-accent nav-cta">Δωρεάν εκτίμηση</a>
+      <button class="hamburger" aria-label="Άνοιγμα μενού" aria-expanded="false">
         <span></span>
         <span></span>
         <span></span>
@@ -65,15 +97,21 @@
     <div class="container">
       <div class="breadcrumb"><a href="index.html">Αρχική</a> / Πελάτες</div>
       <h1>Πελάτες<span class="dot">.</span></h1>
-      <p>Μας εμπιστεύονται για την διανομή των εντύπων τους.</p>
+      <p>Επιχειρήσεις κάθε κλάδου μας εμπιστεύονται για τη διανομή των εντύπων τους.</p>
     </div>
   </section>
+
+  <main id="main-content">
 
   <!-- Client Categories -->
   <section class="client-categories">
     <div class="container">
-      <div class="category-cards">
-        <div class="category-card">
+      <div class="section-header" data-animate="fade-up">
+        <h2 class="section-title">Κλάδοι που εξυπηρετούμε<span class="dot">.</span></h2>
+        <p class="section-subtitle" style="margin: 0 auto;">Από μικρές τοπικές επιχειρήσεις μέχρι μεγάλες αλυσίδες, παρέχουμε αξιόπιστες υπηρεσίες διανομής.</p>
+      </div>
+      <div class="category-cards" data-animate-stagger>
+        <div class="category-card" data-animate="fade-up">
           <h3>Διάφοροι κλάδοι</h3>
           <ul>
             <li>Σούπερ Μάρκετ &amp; Καταστήματα Τροφίμων</li>
@@ -86,7 +124,7 @@
             <li>Ηλεκτρονικά &amp; Τεχνολογία</li>
           </ul>
         </div>
-        <div class="category-card">
+        <div class="category-card" data-animate="fade-up">
           <h3>Καφετέριες</h3>
           <ul>
             <li>Coffee Island</li>
@@ -99,7 +137,7 @@
             <li>Ζαχαροπλαστεία</li>
           </ul>
         </div>
-        <div class="category-card">
+        <div class="category-card" data-animate="fade-up">
           <h3>Φροντιστήρια</h3>
           <ul>
             <li>Φροντιστήρια Μέσης Εκπαίδευσης</li>
@@ -119,9 +157,13 @@
   <!-- Blue CTA Section -->
   <section class="blue-cta">
     <div class="container">
-      <div class="blue-cta-box">
+      <div class="blue-cta-box" data-animate="fade-up">
         <div class="blue-cta-left">
-          <h2>Ζητήστε προσφορά<span class="dot">.</span></h2>
+          <h2>Γίνετε κι εσείς πελάτης μας<span class="dot">.</span></h2>
+          <div class="urgency-note">
+            <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+            Απάντηση εντός 24 ωρών
+          </div>
           <div class="contact-info">
             <a href="tel:2103007716">
               <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.36 11.36 0 003.58.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.36 11.36 0 00.57 3.58 1 1 0 01-.25 1.01l-2.2 2.2z"/></svg>
@@ -155,21 +197,6 @@
               <label for="business-clients">Είδος επιχείρησης</label>
               <input type="text" id="business-clients" name="business" placeholder="π.χ. Εστιατόριο">
             </div>
-            <div class="form-group">
-              <label for="quantity-clients">Αριθμός Φυλλαδίων</label>
-              <input type="text" id="quantity-clients" name="quantity" placeholder="π.χ. 5000">
-            </div>
-            <div class="form-group">
-              <label for="size-clients">Μέγεθος φυλλαδίων</label>
-              <select id="size-clients" name="size">
-                <option value="">Επιλέξτε μέγεθος</option>
-                <option value="A5">A5</option>
-                <option value="A4">A4</option>
-                <option value="A3">A3</option>
-                <option value="DL">DL</option>
-                <option value="other">Άλλο</option>
-              </select>
-            </div>
             <div class="form-group full-width">
               <label for="area-clients">Περιοχή διανομής</label>
               <input type="text" id="area-clients" name="area" placeholder="π.χ. Κέντρο Αθήνας, Πειραιάς">
@@ -180,10 +207,14 @@
             </div>
             <div class="consent-group">
               <input type="checkbox" id="consent-clients" name="consent">
-              <label for="consent-clients">Συμφωνώ με την <a href="#" style="color:var(--accent);">πολιτική απορρήτου</a> και αποδέχομαι την επεξεργασία των προσωπικών μου δεδομένων.</label>
+              <label for="consent-clients">Συμφωνώ με την <a href="privacy.html" style="color:var(--accent);">πολιτική απορρήτου</a> και αποδέχομαι την επεξεργασία των προσωπικών μου δεδομένων.</label>
             </div>
             <div class="submit-group">
-              <button type="submit" class="btn-submit">Αποστολή</button>
+              <button type="submit" class="btn-submit">Ζητήστε δωρεάν προσφορά</button>
+            </div>
+            <div class="form-privacy-note">
+              <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+              Τα δεδομένα σας είναι ασφαλή και δεν κοινοποιούνται σε τρίτους.
             </div>
             <div class="form-message"></div>
           </form>
@@ -191,6 +222,7 @@
       </div>
     </div>
   </section>
+  </main>
 
   <!-- Footer -->
   <footer class="footer">
@@ -198,7 +230,7 @@
       <div class="footer-grid">
         <div class="footer-col">
           <div class="footer-logo">OK<span>PROMO</span></div>
-          <p>Ο αξιόπιστος συνεργάτης σας στη διανομή εντύπων και τις προωθητικές ενέργειες στην Αττική.</p>
+          <p>Ο αξιόπιστος συνεργάτης σας στη διανομή εντύπων και τις προωθητικές ενέργειες σε όλη την Αττική.</p>
         </div>
         <div class="footer-col">
           <h4>Σύνδεσμοι</h4>
@@ -206,7 +238,7 @@
             <li><a href="services.html">Διανομές φυλλαδίων</a></li>
             <li><a href="clients.html">Πελάτες</a></li>
             <li><a href="about.html">Ποιοι είμαστε</a></li>
-            <li><a href="#">Πολιτική απορρήτου</a></li>
+            <li><a href="privacy.html">Πολιτική απορρήτου</a></li>
             <li><a href="contact.html">Επικοινωνία</a></li>
           </ul>
         </div>
@@ -232,7 +264,7 @@
           <a href="#" aria-label="Facebook">
             <svg viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
           </a>
-          <a class="back-to-top">
+          <a class="back-to-top" role="button" tabindex="0" aria-label="Πίσω στην κορυφή">
             Πίσω στην κορυφή
             <svg viewBox="0 0 24 24"><path d="M7 14l5-5 5 5z" fill="currentColor"/></svg>
           </a>
@@ -240,6 +272,10 @@
       </div>
     </div>
   </footer>
+
+  <button class="back-to-top-btn" aria-label="Πίσω στην κορυφή">
+    <svg viewBox="0 0 24 24"><path d="M7 14l5-5 5 5z" fill="currentColor"/></svg>
+  </button>
 
   <script src="js/main.js"></script>
 </body>
