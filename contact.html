@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Επικοινωνία - OK Promo</title>
+  <meta name="description" content="Επικοινωνήστε μαζί μας για να ζητήσετε προσφορά διανομής φυλλαδίων.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="topbar">
+    <div class="container">
+      <div class="topbar-left">
+        <a href="contact.html">ΣΥΧΝΕΣ ΕΡΩΤΗΣΕΙΣ</a>
+      </div>
+      <div class="topbar-right">
+        <a href="tel:2103007716">
+          <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.36 11.36 0 003.58.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.36 11.36 0 00.57 3.58 1 1 0 01-.25 1.01l-2.2 2.2z"/></svg>
+          210 300 77 16
+        </a>
+        <a href="tel:6982610916">
+          <svg viewBox="0 0 24 24"><path d="M15.5 1h-8A2.5 2.5 0 005 3.5v17A2.5 2.5 0 007.5 23h8a2.5 2.5 0 002.5-2.5v-17A2.5 2.5 0 0015.5 1zm-4 21a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm5-4H7V4h9.5v14z"/></svg>
+          698 261 09 16
+        </a>
+        <a href="mailto:sales@okpromo.gr">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          sales@okpromo.gr
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">OK<span>PROMO</span></a>
+      <div class="nav-links">
+        <a href="index.html">Αρχική</a>
+        <div class="dropdown">
+          <a href="services.html" class="dropdown-toggle">
+            Υπηρεσίες
+            <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z" fill="currentColor"/></svg>
+          </a>
+          <div class="dropdown-menu">
+            <a href="services.html">Διανομές φυλλαδίων</a>
+            <a href="services.html#promo">Προωθητικές ενέργειες</a>
+          </div>
+        </div>
+        <a href="about.html">Ποιοι είμαστε</a>
+        <a href="clients.html">Πελάτες</a>
+      </div>
+      <a href="contact.html" class="btn btn-accent nav-cta active">Ζητήστε προσφορά</a>
+      <button class="hamburger" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">Αρχική</a> / Επικοινωνία</div>
+      <h1>Ζητήστε προσφορά<span class="dot">.</span></h1>
+      <p>Επικοινωνήστε μαζί μας.</p>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <div class="container">
+      <div class="standalone-form">
+        <form class="contact-form">
+          <div class="form-group">
+            <label for="name-contact">Όνομα *</label>
+            <input type="text" id="name-contact" name="name" placeholder="Το όνομά σας" required>
+          </div>
+          <div class="form-group">
+            <label for="phone-contact">Τηλέφωνο *</label>
+            <input type="tel" id="phone-contact" name="phone" placeholder="Το τηλέφωνό σας" required>
+          </div>
+          <div class="form-group">
+            <label for="email-contact">Email *</label>
+            <input type="email" id="email-contact" name="email" placeholder="Το email σας" required>
+          </div>
+          <div class="form-group">
+            <label for="business-contact">Είδος επιχείρησης</label>
+            <input type="text" id="business-contact" name="business" placeholder="π.χ. Εστιατόριο">
+          </div>
+          <div class="form-group">
+            <label for="quantity-contact">Αριθμός Φυλλαδίων</label>
+            <input type="text" id="quantity-contact" name="quantity" placeholder="π.χ. 5000">
+          </div>
+          <div class="form-group">
+            <label for="size-contact">Μέγεθος φυλλαδίων</label>
+            <select id="size-contact" name="size">
+              <option value="">Επιλέξτε μέγεθος</option>
+              <option value="A5">A5</option>
+              <option value="A4">A4</option>
+              <option value="A3">A3</option>
+              <option value="DL">DL</option>
+              <option value="other">Άλλο</option>
+            </select>
+          </div>
+          <div class="form-group full-width">
+            <label for="area-contact">Περιοχή διανομής</label>
+            <input type="text" id="area-contact" name="area" placeholder="π.χ. Κέντρο Αθήνας, Πειραιάς">
+          </div>
+          <div class="form-group full-width">
+            <label for="info-contact">Πρόσθετες πληροφορίες</label>
+            <textarea id="info-contact" name="info" placeholder="Γράψτε τυχόν πρόσθετες πληροφορίες..."></textarea>
+          </div>
+          <div class="consent-group">
+            <input type="checkbox" id="consent-contact" name="consent">
+            <label for="consent-contact">Συμφωνώ με την <a href="#" style="color:var(--accent);">πολιτική απορρήτου</a> και αποδέχομαι την επεξεργασία των προσωπικών μου δεδομένων.</label>
+          </div>
+          <div class="submit-group">
+            <button type="submit" class="btn-submit">Αποστολή</button>
+          </div>
+          <div class="form-message"></div>
+        </form>
+      </div>
+
+      <!-- Contact Info Cards -->
+      <div class="contact-info-cards">
+        <div class="contact-info-card">
+          <div class="icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1112 6.5a2.5 2.5 0 010 5z"/></svg>
+          </div>
+          <h3>Διεύθυνση</h3>
+          <p>Λεωφ. Αλεξάνδρας 123<br>Αθήνα 114 74</p>
+        </div>
+        <div class="contact-info-card">
+          <div class="icon">
+            <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.36 11.36 0 003.58.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.36 11.36 0 00.57 3.58 1 1 0 01-.25 1.01l-2.2 2.2z"/></svg>
+          </div>
+          <h3>Επικοινωνία</h3>
+          <p><a href="tel:2103007716">210 300 77 16</a><br><a href="tel:6982610916">698 261 09 16</a><br><a href="mailto:sales@okpromo.gr">sales@okpromo.gr</a></p>
+        </div>
+        <div class="contact-info-card">
+          <div class="icon">
+            <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+          </div>
+          <h3>Ώρες επικοινωνίας</h3>
+          <p>Δευτέρα - Παρασκευή<br>09:00 - 18:00</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-logo">OK<span>PROMO</span></div>
+          <p>Ο αξιόπιστος συνεργάτης σας στη διανομή εντύπων και τις προωθητικές ενέργειες στην Αττική.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Σύνδεσμοι</h4>
+          <ul>
+            <li><a href="services.html">Διανομές φυλλαδίων</a></li>
+            <li><a href="clients.html">Πελάτες</a></li>
+            <li><a href="about.html">Ποιοι είμαστε</a></li>
+            <li><a href="#">Πολιτική απορρήτου</a></li>
+            <li><a href="contact.html">Επικοινωνία</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Επικοινωνία</h4>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1112 6.5a2.5 2.5 0 010 5z"/></svg>
+            <span>Λεωφ. Αλεξάνδρας 123, Αθήνα 114 74</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.36 11.36 0 003.58.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.36 11.36 0 00.57 3.58 1 1 0 01-.25 1.01l-2.2 2.2z"/></svg>
+            <span><a href="tel:2103007716">210 300 77 16</a> | <a href="tel:6982610916">698 261 09 16</a></span>
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            <span><a href="mailto:sales@okpromo.gr">sales@okpromo.gr</a></span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2024 OK Promo. All rights reserved.</span>
+        <div class="footer-bottom-right">
+          <a href="#" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
+          </a>
+          <a class="back-to-top">
+            Πίσω στην κορυφή
+            <svg viewBox="0 0 24 24"><path d="M7 14l5-5 5 5z" fill="currentColor"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

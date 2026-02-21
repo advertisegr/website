@@ -10,7 +10,22 @@
       "Bash(git add:*)",
       "Bash(git commit -m \"$\\(cat <<''EOF''\nRedesign landing page with Corona-style layout and business improvements\n\n- Convert to split-screen layout \\(gold left panel, dark blue right\\)\n- Switch to Poppins font and elegant color palette\n- Add clear value proposition subtitle\n- Improve pricing section with credibility context\n- Increase font sizes for better readability\n- Center pricing display under headings\n- Remove services section for cleaner look\n- Make logo transparent\n- Update background image to newspapers/leaflets theme\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
       "Bash(git push:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "WebFetch(domain:www.facebook.com)",
+      "WebFetch(domain:www.linkedin.com)",
+      "WebFetch(domain:www.greenpromotions.gr)",
+      "WebFetch(domain:app.linq.co)",
+      "WebFetch(domain:www.vrisko.gr)",
+      "WebFetch(domain:www.skywalker.gr)",
+      "WebFetch(domain:www.dianomi-fylladion.gr)",
+      "WebFetch(domain:www.pro-othisi.com)",
+      "WebFetch(domain:argoadvert.com)",
+      "WebFetch(domain:www.in-n-out.gr)",
+      "WebFetch(domain:spc.com.gr)",
+      "WebFetch(domain:www.clickrank.ai)",
+      "WebFetch(domain:miow.gr)",
+      "WebFetch(domain:portaplus.gr)",
+      "WebFetch(domain:vic.gr)"
     ]
   }
 }
