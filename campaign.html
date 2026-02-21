@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <title>Campaign | advertisegr</title>
+    <meta name="description" content="Campaign details and article." />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="stylesheet" href="css/pages.css" />
+  </head>
+  <body>
+    <nav class="page-nav">
+      <a href="index.html" class="page-nav__brand">advertisegr</a>
+      <div class="page-nav__links">
+        <a href="campaigns.html" class="active">Campaigns</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="work.html">Work</a>
+      </div>
+    </nav>
+
+    <div id="campaign-loading" class="loading"></div>
+
+    <div id="campaign-content" style="display: none;">
+      <!-- Hero image -->
+      <div class="campaign-hero" id="campaign-hero" style="display: none;">
+        <img class="campaign-hero__image" id="campaign-hero-img" src="" alt="" />
+      </div>
+
+      <!-- Article -->
+      <article class="campaign-article">
+        <a href="campaigns.html" class="campaign-article__back">&larr; All Campaigns</a>
+        <h1 class="campaign-article__title" id="campaign-title"></h1>
+        <div class="campaign-article__date" id="campaign-date"></div>
+        <div class="campaign-article__content" id="campaign-body"></div>
+      </article>
+
+      <!-- Gallery of secondary images -->
+      <section class="campaign-gallery" id="campaign-gallery" style="display: none;">
+        <h2 class="campaign-gallery__title">Gallery</h2>
+        <div class="campaign-gallery__grid" id="campaign-gallery-grid"></div>
+      </section>
+    </div>
+
+    <!-- Error state -->
+    <div id="campaign-error" class="empty-state" style="display: none;">
+      <div class="empty-state__icon">--</div>
+      <p>Campaign not found.</p>
+      <p style="margin-top: 1rem;"><a href="campaigns.html" style="color: var(--gold);">Back to Campaigns</a></p>
+    </div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+      <button class="lightbox__close" aria-label="Close">&times;</button>
+      <img id="lightbox-img" src="" alt="" />
+    </div>
+
+    <footer class="page-footer">
+      &copy; 2026 advertisegr. All rights reserved.
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.97.0/dist/umd/supabase.min.js" integrity="sha384-1+ItoWbWcmVSm+Y+dJaUt4SEWNA21/jxef+Z0TSHHVy/dEUxEUEnZ1bHn6GT5hj+" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked@17.0.2/lib/marked.umd.js" integrity="sha384-HQ7B/VBz5B0fo8GBiEFD/BZsAVXM9iDzC+hpeY1M1cpYezmRrwJSQh5MkTEI8G/H" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.3.1/dist/purify.min.js" integrity="sha384-80VlBZnyAwkkqtSfg5NhPyZff6nU4K/qniLBL8Jnm4KDv6jZhLiYtJbhglg/i9ww" crossorigin="anonymous"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/campaign.js" defer></script>
+  </body>
+</html>

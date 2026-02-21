@@ -158,6 +158,13 @@
               <input type="text" id="form-category" />
             </div>
 
+            <!-- Content / Markdown (campaigns only) -->
+            <div class="form-group" id="field-content" style="display: none;">
+              <label for="form-content">Article Content (Markdown)</label>
+              <textarea id="form-content" rows="15"></textarea>
+              <p class="form-hint">Supports **bold**, *italic*, ## headings, - lists, [links](url), > quotes, images via ![alt](url)</p>
+            </div>
+
             <!-- Image Upload -->
             <div class="form-group">
               <label>Image</label>
@@ -165,6 +172,16 @@
                 <input type="file" id="form-image" accept="image/*" />
                 <span class="image-upload__label">Click or drag to upload an image</span>
                 <img class="image-upload__preview" id="image-preview" src="" alt="Preview" />
+              </div>
+            </div>
+
+            <!-- Secondary Images (campaigns only) -->
+            <div class="form-group" id="field-secondary-images" style="display: none;">
+              <label>Secondary Images</label>
+              <div id="secondary-images-list" class="secondary-images-grid"></div>
+              <div class="image-upload">
+                <input type="file" id="form-secondary-images" accept="image/*" multiple />
+                <span class="image-upload__label">Click or drag to add more images</span>
               </div>
             </div>
 

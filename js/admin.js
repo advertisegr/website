@@ -48,10 +48,18 @@
   var formCategory = document.getElementById('form-category');
   var formImage = document.getElementById('form-image');
   var imagePreview = document.getElementById('image-preview');
+  var formContent = document.getElementById('form-content');
+  var formSecondaryImages = document.getElementById('form-secondary-images');
+  var secondaryImagesList = document.getElementById('secondary-images-list');
 
   // Conditional field containers
   var fieldStatus = document.getElementById('field-status');
   var fieldCategory = document.getElementById('field-category');
+  var fieldContent = document.getElementById('field-content');
+  var fieldSecondaryImages = document.getElementById('field-secondary-images');
+
+  // Modal element for width toggling
+  var modalEl = document.querySelector('.modal');
 
   // Tab refs
   var tabs = document.querySelectorAll('.admin-tabs__tab');
@@ -59,6 +67,8 @@
 
   // Current selected image file
   var selectedFile = null;
+  // Pending secondary image files
+  var pendingSecondaryFiles = [];
 
   // ─── Auth ───
 
@@ -223,13 +233,23 @@
     formSuccess.style.display = 'none';
     itemForm.reset();
     selectedFile = null;
+    pendingSecondaryFiles = [];
     imagePreview.style.display = 'none';
+    secondaryImagesList.innerHTML = '';
 
     formTable.value = tableName;
 
+    var isCampaign = (tableName === 'campaigns');
+
+    // Toggle wide modal for campaigns
+    modalEl.classList.toggle('modal--wide', isCampaign);
+
     // Show/hide conditional fields
-    fieldStatus.style.display = (tableName === 'campaigns') ? 'block' : 'none';
+    fieldStatus.style.display = isCampaign ? 'block' : 'none';
+    fieldContent.style.display = isCampaign ? 'block' : 'none';
+    fieldSecondaryImages.style.display = isCampaign ? 'block' : 'none';
     fieldCategory.style.display = (tableName === 'gallery_items') ? 'block' : 'none';
+
     if (item) {
       // Edit mode
       modalTitle.textContent = 'Edit Item';
@@ -238,17 +258,82 @@
       formDescription.value = item.description || '';
       formStatus.value = item.status || 'draft';
       formCategory.value = item.category || '';
+      formContent.value = item.content || '';
       if (item.image_url) {
         imagePreview.src = item.image_url;
         imagePreview.style.display = 'block';
+      }
+      // Load existing secondary images for campaigns
+      if (isCampaign) {
+        loadSecondaryImages(item.id);
       }
     } else {
       // Create mode
       modalTitle.textContent = 'Add New';
       formId.value = '';
+      formContent.value = '';
     }
 
     modalOverlay.classList.add('active');
+  }
+
+  // Load secondary images for a campaign into the modal grid
+  async function loadSecondaryImages(campaignId) {
+    var { data, error } = await db
+      .from('campaign_images')
+      .select('*')
+      .eq('campaign_id', campaignId)
+      .order('sort_order', { ascending: true });
+
+    if (error || !data) return;
+
+    secondaryImagesList.innerHTML = '';
+    data.forEach(function (img) {
+      renderSecondaryImageThumb(img.id, img.image_url);
+    });
+  }
+
+  // Render a single secondary image thumbnail with delete button
+  function renderSecondaryImageThumb(imageId, imageUrl) {
+    var item = document.createElement('div');
+    item.className = 'secondary-images-grid__item';
+
+    var img = document.createElement('img');
+    img.className = 'secondary-images-grid__img';
+    img.src = imageUrl;
+    img.alt = '';
+    item.appendChild(img);
+
+    var delBtn = document.createElement('button');
+    delBtn.type = 'button';
+    delBtn.className = 'secondary-images-grid__delete';
+    delBtn.textContent = '\u00d7';
+    delBtn.addEventListener('click', function () {
+      deleteSecondaryImage(imageId, imageUrl, item);
+    });
+    item.appendChild(delBtn);
+
+    secondaryImagesList.appendChild(item);
+  }
+
+  // Delete a secondary image from storage + database
+  async function deleteSecondaryImage(imageId, imageUrl, domElement) {
+    // Extract storage path from the public URL
+    var storagePath = extractStoragePath(imageUrl);
+    if (storagePath) {
+      await db.storage.from('images').remove([storagePath]);
+    }
+    await db.from('campaign_images').delete().eq('id', imageId);
+    domElement.remove();
+  }
+
+  // Extract the storage path from a Supabase public URL
+  function extractStoragePath(url) {
+    if (!url) return null;
+    var marker = '/object/public/images/';
+    var idx = url.indexOf(marker);
+    if (idx === -1) return null;
+    return url.substring(idx + marker.length);
   }
 
   function closeModal() {
@@ -274,6 +359,14 @@
       imagePreview.style.display = 'block';
     };
     reader.readAsDataURL(file);
+  });
+
+  // Secondary images file selection
+  formSecondaryImages.addEventListener('change', function (e) {
+    var files = Array.from(e.target.files);
+    files.forEach(function (file) {
+      pendingSecondaryFiles.push(file);
+    });
   });
 
   // ─── Save ───
@@ -362,6 +455,7 @@
 
     if (tableName === 'campaigns') {
       record.status = formStatus.value;
+      record.content = formContent.value;
       record.updated_at = new Date().toISOString();
     }
 
@@ -375,7 +469,7 @@
       result = await db.from(tableName).update(record).eq('id', id);
     } else {
       // Insert
-      result = await db.from(tableName).insert(record);
+      result = await db.from(tableName).insert(record).select();
     }
 
     modalSave.disabled = false;
@@ -385,6 +479,44 @@
       formError.textContent = 'Save failed: ' + result.error.message;
       formError.style.display = 'block';
       return;
+    }
+
+    // Upload secondary images for campaigns
+    if (tableName === 'campaigns' && pendingSecondaryFiles.length > 0) {
+      // Get the campaign ID (from edit or from newly inserted record)
+      var campaignId = id;
+      if (!campaignId && result.data && result.data.length > 0) {
+        campaignId = result.data[0].id;
+      }
+
+      if (campaignId) {
+        var allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+        var timestamp = Date.now();
+
+        for (var i = 0; i < pendingSecondaryFiles.length; i++) {
+          var secFile = pendingSecondaryFiles[i];
+
+          // Validate each file
+          if (allowedTypes.indexOf(secFile.type) === -1) continue;
+          if (secFile.size > 5 * 1024 * 1024) continue;
+
+          var secExt = secFile.name.split('.').pop().toLowerCase().replace(/[^a-z0-9]/g, '');
+          var secPath = 'campaigns/secondary/' + timestamp + '-' + i + '.' + secExt;
+
+          var secUpload = await db.storage.from('images').upload(secPath, secFile);
+          if (secUpload.error) continue;
+
+          var secUrlData = db.storage.from('images').getPublicUrl(secPath);
+
+          await db.from('campaign_images').insert({
+            campaign_id: campaignId,
+            image_url: secUrlData.data.publicUrl,
+            sort_order: i
+          });
+        }
+      }
+
+      pendingSecondaryFiles = [];
     }
 
     closeModal();
@@ -399,6 +531,24 @@
     if (allowedTables.indexOf(tableName) === -1) return;
 
     if (!confirm('Are you sure you want to delete this item?')) return;
+
+    // Clean up secondary images from storage before deleting a campaign
+    if (tableName === 'campaigns') {
+      var { data: secImages } = await db
+        .from('campaign_images')
+        .select('image_url')
+        .eq('campaign_id', id);
+
+      if (secImages && secImages.length > 0) {
+        var paths = secImages
+          .map(function (img) { return extractStoragePath(img.image_url); })
+          .filter(Boolean);
+        if (paths.length > 0) {
+          await db.storage.from('images').remove(paths);
+        }
+      }
+      // Rows in campaign_images will be cascade-deleted by the FK constraint
+    }
 
     var { error } = await db.from(tableName).delete().eq('id', id);
 
