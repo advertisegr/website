@@ -159,3 +159,14 @@ function showMessage(message, type) {
 }
 
 
+// Preload images for better performance
+function preloadImages() {
+    const images = ['logo.png'];
+    images.forEach(src => {
+        const img = new Image();
+        img.src = src;
+    });
+}
+
+// Initialize
+preloadImages();
