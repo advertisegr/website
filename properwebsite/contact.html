@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Επικοινωνία & Προσφορά | OK Promo - Διανομή Φυλλαδίων Αθήνα</title>
   <meta name="description" content="Ζητήστε δωρεάν προσφορά για διανομή φυλλαδίων στην Αττική. Καλέστε 210 300 77 16 ή συμπληρώστε τη φόρμα. Απάντηση εντός 24 ωρών.">
   <meta name="robots" content="index, follow">
@@ -17,6 +20,7 @@
   <meta property="og:title" content="Επικοινωνία & Προσφορά | OK Promo">
   <meta property="og:description" content="Ζητήστε δωρεάν προσφορά για διανομή φυλλαδίων. Απάντηση εντός 24 ωρών.">
   <meta property="og:url" content="https://okpromo.gr/contact.html">
+  <meta property="og:image" content="https://okpromo.gr/images/og-image.jpg">
 
   <meta name="twitter:card" content="summary_large_image">
 
@@ -71,11 +75,11 @@
       <div class="nav-links">
         <a href="index.html">Αρχική</a>
         <div class="dropdown">
-          <a href="services.html" class="dropdown-toggle">
+          <a href="services.html" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
             Υπηρεσίες
             <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z" fill="currentColor"/></svg>
           </a>
-          <div class="dropdown-menu">
+          <div class="dropdown-menu" role="menu">
             <a href="services.html">Διανομές φυλλαδίων</a>
             <a href="services.html#promo">Προωθητικές ενέργειες</a>
           </div>
@@ -108,25 +112,29 @@
     <div class="container">
       <div class="standalone-form" data-animate="fade-up">
         <form class="contact-form">
+          <!-- Honeypot - hidden from real users, bots fill it -->
+          <div style="position:absolute;left:-9999px" aria-hidden="true">
+            <input type="text" name="website" tabindex="-1" autocomplete="off">
+          </div>
           <div class="form-group">
             <label for="name-contact">Όνομα *</label>
-            <input type="text" id="name-contact" name="name" placeholder="Το όνομά σας" required>
+            <input type="text" id="name-contact" name="name" placeholder="Το όνομά σας" required maxlength="100">
           </div>
           <div class="form-group">
             <label for="phone-contact">Τηλέφωνο *</label>
-            <input type="tel" id="phone-contact" name="phone" placeholder="Το τηλέφωνό σας" required>
+            <input type="tel" id="phone-contact" name="phone" placeholder="Το τηλέφωνό σας" required maxlength="30">
           </div>
           <div class="form-group">
             <label for="email-contact">Email *</label>
-            <input type="email" id="email-contact" name="email" placeholder="Το email σας" required>
+            <input type="email" id="email-contact" name="email" placeholder="Το email σας" required maxlength="200">
           </div>
           <div class="form-group">
             <label for="business-contact">Είδος επιχείρησης</label>
-            <input type="text" id="business-contact" name="business" placeholder="π.χ. Εστιατόριο">
+            <input type="text" id="business-contact" name="business" placeholder="π.χ. Εστιατόριο" maxlength="100">
           </div>
           <div class="form-group">
             <label for="quantity-contact">Αριθμός Φυλλαδίων</label>
-            <input type="text" id="quantity-contact" name="quantity" placeholder="π.χ. 5000">
+            <input type="text" id="quantity-contact" name="quantity" placeholder="π.χ. 5000" maxlength="20">
           </div>
           <div class="form-group">
             <label for="size-contact">Μέγεθος φυλλαδίων</label>
@@ -141,11 +149,11 @@
           </div>
           <div class="form-group full-width">
             <label for="area-contact">Περιοχή διανομής</label>
-            <input type="text" id="area-contact" name="area" placeholder="π.χ. Κέντρο Αθήνας, Πειραιάς">
+            <input type="text" id="area-contact" name="area" placeholder="π.χ. Κέντρο Αθήνας, Πειραιάς" maxlength="200">
           </div>
           <div class="form-group full-width">
             <label for="info-contact">Πρόσθετες πληροφορίες</label>
-            <textarea id="info-contact" name="info" placeholder="Γράψτε τυχόν πρόσθετες πληροφορίες..."></textarea>
+            <textarea id="info-contact" name="info" placeholder="Γράψτε τυχόν πρόσθετες πληροφορίες..." maxlength="2000"></textarea>
           </div>
           <div class="consent-group">
             <input type="checkbox" id="consent-contact" name="consent">
@@ -158,11 +166,12 @@
             <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
             Τα δεδομένα σας είναι ασφαλή και δεν κοινοποιούνται σε τρίτους.
           </div>
-          <div class="form-message"></div>
+          <div class="form-message" role="alert" aria-live="assertive" aria-atomic="true"></div>
         </form>
       </div>
 
       <!-- Contact Info Cards -->
+      <h2 class="sr-only">Στοιχεία Επικοινωνίας</h2>
       <div class="contact-info-cards" data-animate-stagger>
         <div class="contact-info-card" data-animate="fade-up">
           <div class="icon">
@@ -189,7 +198,7 @@
 
       <!-- Google Maps -->
       <div class="contact-map" data-animate="fade-up">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3144.5!2d23.7396!3d37.9922!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a1bd3960e4b9b3%3A0x4a1c0f3e1f2a3b4c!2zzpvOtc-Jz4YuIM6RzrvOtc6-zqzOvc60z4HOsc-CIDEyMywgzpHOuM6uzr3OsQ!5e0!3m2!1sel!2sgr!4v1700000000000!5m2!1sel!2sgr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="OK Promo - Χάρτης τοποθεσίας"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3144.5!2d23.7396!3d37.9922!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a1bd3960e4b9b3%3A0x4a1c0f3e1f2a3b4c!2zzpvOtc-Jz4YuIM6RzrvOtc6-zqzOvc60z4HOsc-CIDEyMywgzpHOuM6uzr3OsQ!5e0!3m2!1sel!2sgr!4v1700000000000!5m2!1sel!2sgr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" sandbox="allow-scripts allow-same-origin" title="OK Promo - Χάρτης τοποθεσίας"></iframe>
       </div>
     </div>
   </section>
@@ -248,6 +257,6 @@
     <svg viewBox="0 0 24 24"><path d="M7 14l5-5 5 5z" fill="currentColor"/></svg>
   </button>
 
-  <script src="js/main.js"></script>
+  <script src="js/main.js" defer></script>
 </body>
 </html>

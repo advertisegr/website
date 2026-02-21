@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Διανομή Φυλλαδίων & Προωθητικές Ενέργειες | OK Promo Αθήνα</title>
   <meta name="description" content="Υπηρεσίες διανομής φυλλαδίων σε γραμματοκιβώτια, πόρτα-πόρτα, επιχειρήσεις και σταθερά σημεία σε όλη την Αττική. Φωτογραφική τεκμηρίωση. Καλέστε 210 300 77 16">
   <meta name="robots" content="index, follow">
@@ -17,6 +20,7 @@
   <meta property="og:title" content="Διανομή Φυλλαδίων & Προωθητικές Ενέργειες | OK Promo">
   <meta property="og:description" content="Υπηρεσίες διανομής φυλλαδίων σε γραμματοκιβώτια, πόρτα-πόρτα, επιχειρήσεις. Δωρεάν προσφορά σε 24 ώρες.">
   <meta property="og:url" content="https://okpromo.gr/services.html">
+  <meta property="og:image" content="https://okpromo.gr/images/og-image.jpg">
 
   <meta name="twitter:card" content="summary_large_image">
 
@@ -150,11 +154,11 @@
       <div class="nav-links">
         <a href="index.html">Αρχική</a>
         <div class="dropdown">
-          <a href="services.html" class="dropdown-toggle active">
+          <a href="services.html" class="dropdown-toggle active" aria-haspopup="true" aria-expanded="false">
             Υπηρεσίες
             <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z" fill="currentColor"/></svg>
           </a>
-          <div class="dropdown-menu">
+          <div class="dropdown-menu" role="menu">
             <a href="services.html">Διανομές φυλλαδίων</a>
             <a href="services.html#promo">Προωθητικές ενέργειες</a>
           </div>
@@ -269,47 +273,47 @@
       </div>
       <div class="faq-list" data-animate="fade-up">
         <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-1">
             Ποιες περιοχές καλύπτετε;
             <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z" fill="currentColor"/></svg>
           </button>
-          <div class="faq-answer">
+          <div class="faq-answer" id="faq-answer-1">
             <p>Καλύπτουμε ολόκληρη την Αττική, συμπεριλαμβανομένων Αθήνας, Πειραιά, βόρειων και νότιων προαστίων, ανατολικής και δυτικής Αττικής. Μπορούμε να στοχεύσουμε συγκεκριμένες γειτονιές ή ολόκληρους δήμους ανάλογα με τις ανάγκες σας.</p>
           </div>
         </div>
         <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-2">
             Ποια είναι η ελάχιστη παραγγελία;
             <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z" fill="currentColor"/></svg>
           </button>
-          <div class="faq-answer">
+          <div class="faq-answer" id="faq-answer-2">
             <p>Η ελάχιστη παραγγελία ξεκινά από 1.000 φυλλάδια. Επικοινωνήστε μαζί μας για εξατομικευμένη προσφορά ανάλογα με τις ανάγκες σας.</p>
           </div>
         </div>
         <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-3">
             Πώς αποδεικνύεται ότι έγινε η διανομή;
             <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z" fill="currentColor"/></svg>
           </button>
-          <div class="faq-answer">
+          <div class="faq-answer" id="faq-answer-3">
             <p>Παρέχουμε πλήρη φωτογραφική τεκμηρίωση κατά τη διάρκεια της διανομής καθώς και αναλυτική αναφορά αποτελεσμάτων μετά την ολοκλήρωσή της.</p>
           </div>
         </div>
         <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-4">
             Αναλαμβάνετε και την εκτύπωση των φυλλαδίων;
             <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z" fill="currentColor"/></svg>
           </button>
-          <div class="faq-answer">
+          <div class="faq-answer" id="faq-answer-4">
             <p>Ναι, συνεργαζόμαστε με αξιόπιστα τυπογραφεία και μπορούμε να αναλάβουμε την εκτύπωση σε ανταγωνιστικές τιμές. Εναλλακτικά, μπορείτε να μας παραδώσετε τα δικά σας φυλλάδια.</p>
           </div>
         </div>
         <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-5">
             Πόσο κοστίζει η διανομή φυλλαδίων;
             <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z" fill="currentColor"/></svg>
           </button>
-          <div class="faq-answer">
+          <div class="faq-answer" id="faq-answer-5">
             <p>Το κόστος εξαρτάται από τον αριθμό φυλλαδίων, τις περιοχές διανομής και τον τύπο διανομής. Ζητήστε δωρεάν προσφορά και θα σας απαντήσουμε εντός 24 ωρών.</p>
           </div>
         </div>
@@ -394,7 +398,7 @@
               <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
               Τα δεδομένα σας είναι ασφαλή και δεν κοινοποιούνται σε τρίτους.
             </div>
-            <div class="form-message"></div>
+            <div class="form-message" role="alert" aria-live="assertive" aria-atomic="true"></div>
           </form>
         </div>
       </div>
@@ -455,6 +459,6 @@
     <svg viewBox="0 0 24 24"><path d="M7 14l5-5 5 5z" fill="currentColor"/></svg>
   </button>
 
-  <script src="js/main.js"></script>
+  <script src="js/main.js" defer></script>
 </body>
 </html>

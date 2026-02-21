@@ -31,16 +31,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function openMenu() {
     hamburger.classList.add('active');
+    hamburger.setAttribute('aria-expanded', 'true');
     navLinks.classList.add('active');
     overlay.classList.add('active');
     document.body.classList.add('menu-open');
+
+    // Move focus to first nav link
+    const firstLink = navLinks.querySelector('a');
+    if (firstLink) firstLink.focus();
   }
 
   function closeMenu() {
     hamburger.classList.remove('active');
+    hamburger.setAttribute('aria-expanded', 'false');
     navLinks.classList.remove('active');
     overlay.classList.remove('active');
     document.body.classList.remove('menu-open');
+
+    // Return focus to hamburger
+    if (hamburger) hamburger.focus();
   }
 
   if (hamburger) {
@@ -95,6 +104,69 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // ===== Mobile Menu Focus Trap =====
+  if (navLinks) {
+    navLinks.addEventListener('keydown', (e) => {
+      if (e.key !== 'Tab' || !navLinks.classList.contains('active')) return;
+
+      const focusableEls = navLinks.querySelectorAll('a, button');
+      if (focusableEls.length === 0) return;
+
+      const firstEl = focusableEls[0];
+      const lastEl = focusableEls[focusableEls.length - 1];
+
+      if (e.shiftKey && document.activeElement === firstEl) {
+        e.preventDefault();
+        lastEl.focus();
+      } else if (!e.shiftKey && document.activeElement === lastEl) {
+        e.preventDefault();
+        firstEl.focus();
+      }
+    });
+  }
+
+  // ===== Desktop Dropdown Keyboard Navigation =====
+  dropdowns.forEach(dropdown => {
+    const toggle = dropdown.querySelector('.dropdown-toggle');
+    const menu = dropdown.querySelector('.dropdown-menu');
+    if (!toggle || !menu) return;
+
+    // Enter/Space toggles dropdown on desktop
+    toggle.addEventListener('keydown', (e) => {
+      if (window.innerWidth <= 768) return;
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const expanded = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!expanded));
+        if (!expanded) {
+          const firstItem = menu.querySelector('a');
+          if (firstItem) firstItem.focus();
+        }
+      }
+    });
+
+    // Escape closes dropdown
+    dropdown.addEventListener('keydown', (e) => {
+      if (window.innerWidth <= 768) return;
+      if (e.key === 'Escape') {
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.focus();
+      }
+    });
+
+    // Update aria-expanded on hover for desktop
+    dropdown.addEventListener('mouseenter', () => {
+      if (window.innerWidth > 768) {
+        toggle.setAttribute('aria-expanded', 'true');
+      }
+    });
+    dropdown.addEventListener('mouseleave', () => {
+      if (window.innerWidth > 768) {
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+
   // ===== Back to Top Button =====
   const backToTopBtn = document.querySelector('.back-to-top-btn');
   const backToTopInline = document.querySelector('.back-to-top');
@@ -130,19 +202,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const animateElements = document.querySelectorAll('[data-animate]');
 
     if (animateElements.length > 0) {
-      const animateObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animated');
-            animateObserver.unobserve(entry.target);
-          }
+      if ('IntersectionObserver' in window) {
+        const animateObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('animated');
+              animateObserver.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.15,
+          rootMargin: '0px 0px -40px 0px'
         });
-      }, {
-        threshold: 0.15,
-        rootMargin: '0px 0px -40px 0px'
-      });
 
-      animateElements.forEach(el => animateObserver.observe(el));
+        animateElements.forEach(el => animateObserver.observe(el));
+      } else {
+        // Fallback: show all elements immediately
+        animateElements.forEach(el => el.classList.add('animated'));
+      }
     }
   } else {
     // If reduced motion, make everything visible immediately
@@ -155,16 +232,26 @@ document.addEventListener('DOMContentLoaded', () => {
   const counterElements = document.querySelectorAll('[data-count]');
 
   if (counterElements.length > 0) {
-    const counterObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          animateCounter(entry.target);
-          counterObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.5 });
+    if ('IntersectionObserver' in window) {
+      const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateCounter(entry.target);
+            counterObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
 
-    counterElements.forEach(el => counterObserver.observe(el));
+      counterElements.forEach(el => counterObserver.observe(el));
+    } else {
+      // Fallback: show final values immediately
+      counterElements.forEach(el => {
+        const target = parseInt(el.getAttribute('data-count'), 10);
+        const suffix = el.getAttribute('data-count-suffix') || '';
+        const prefix = el.getAttribute('data-count-prefix') || '';
+        el.textContent = prefix + target.toLocaleString('el-GR') + suffix;
+      });
+    }
   }
 
   function animateCounter(element) {
@@ -207,21 +294,42 @@ document.addEventListener('DOMContentLoaded', () => {
       question.addEventListener('click', () => {
         const isActive = item.classList.contains('active');
 
-        // Close all other items
+        // Close all other items and update their aria-expanded
         faqItems.forEach(other => {
-          if (other !== item) other.classList.remove('active');
+          if (other !== item) {
+            other.classList.remove('active');
+            const otherBtn = other.querySelector('.faq-question');
+            if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+          }
         });
 
         // Toggle current
         item.classList.toggle('active', !isActive);
+        question.setAttribute('aria-expanded', String(!isActive));
       });
     }
   });
 
   // ===== Contact Form Handling =====
+  // Rate limiting: track last submission time
+  let lastSubmitTime = 0;
+  const SUBMIT_COOLDOWN_MS = 10000; // 10 seconds between submissions
+
   document.querySelectorAll('.contact-form').forEach(form => {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
+
+      // Honeypot check: if hidden field is filled, silently reject (it's a bot)
+      const honeypot = form.querySelector('[name="website"]');
+      if (honeypot && honeypot.value) {
+        return;
+      }
+
+      // Rate limit check
+      const now = Date.now();
+      if (now - lastSubmitTime < SUBMIT_COOLDOWN_MS) {
+        return;
+      }
 
       const name = form.querySelector('[name="name"]');
       const phone = form.querySelector('[name="phone"]');
@@ -232,15 +340,22 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!messageEl) {
         messageEl = document.createElement('div');
         messageEl.className = 'form-message';
+        messageEl.setAttribute('role', 'alert');
+        messageEl.setAttribute('aria-live', 'assertive');
+        messageEl.setAttribute('aria-atomic', 'true');
         form.appendChild(messageEl);
       }
 
       // Reset
       messageEl.className = 'form-message';
+      messageEl.setAttribute('role', 'alert');
+      messageEl.setAttribute('aria-live', 'assertive');
+      messageEl.setAttribute('aria-atomic', 'true');
       messageEl.style.display = 'none';
 
       // Remove previous error states
       form.querySelectorAll('.form-group.error').forEach(g => g.classList.remove('error'));
+      form.querySelectorAll('[aria-invalid]').forEach(el => el.removeAttribute('aria-invalid'));
 
       // Validation
       let hasErrors = false;
@@ -248,18 +363,32 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!name || !name.value.trim()) {
         const group = name ? name.closest('.form-group') : null;
         if (group) group.classList.add('error');
+        if (name) name.setAttribute('aria-invalid', 'true');
         hasErrors = true;
       }
 
       if (!phone || !phone.value.trim()) {
         const group = phone ? phone.closest('.form-group') : null;
         if (group) group.classList.add('error');
+        if (phone) phone.setAttribute('aria-invalid', 'true');
         hasErrors = true;
       }
 
       if (!email || !email.value.trim()) {
         const group = email ? email.closest('.form-group') : null;
         if (group) group.classList.add('error');
+        if (email) email.setAttribute('aria-invalid', 'true');
+        hasErrors = true;
+      }
+
+      // Input length validation
+      if (name && name.value.length > 100) {
+        hasErrors = true;
+      }
+      if (phone && phone.value.length > 30) {
+        hasErrors = true;
+      }
+      if (email && email.value.length > 200) {
         hasErrors = true;
       }
 
@@ -276,6 +405,8 @@ document.addEventListener('DOMContentLoaded', () => {
         messageEl.style.display = 'block';
         return;
       }
+
+      lastSubmitTime = now;
 
       // Success
       messageEl.textContent = 'Το μήνυμά σας στάλθηκε επιτυχώς! Θα επικοινωνήσουμε μαζί σας εντός 24 ωρών.';

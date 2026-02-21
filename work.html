@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <title>Work | advertisegr</title>
+    <meta name="description" content="Work with us - distribution services and job opportunities at advertisegr." />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="stylesheet" href="css/pages.css" />
+  </head>
+  <body>
+    <nav class="page-nav">
+      <a href="index.html" class="page-nav__brand">advertisegr</a>
+      <div class="page-nav__links">
+        <a href="campaigns.html">Campaigns</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="work.html" class="active">Work</a>
+      </div>
+    </nav>
+
+    <header class="page-header">
+      <h1>Work With Us</h1>
+      <p>Distribution services and opportunities for businesses and distributors.</p>
+    </header>
+
+    <!-- Application Form -->
+    <section class="apply-section">
+      <div class="apply-section__inner">
+        <h2 class="apply-section__title">Apply Now</h2>
+        <p class="apply-section__subtitle">Join our distribution network or register your business.</p>
+
+        <form id="apply-form" class="apply-form" novalidate>
+          <!-- Honeypot — hidden from real users, bots fill it -->
+          <div class="apply-form__hp" aria-hidden="true" tabindex="-1">
+            <label for="hp-website">Website</label>
+            <input type="text" name="website" id="hp-website" autocomplete="off" tabindex="-1" />
+          </div>
+
+          <!-- Type selection -->
+          <div class="apply-form__type-select">
+            <label class="apply-form__type-card">
+              <input type="radio" name="apply-type" value="distributor" required />
+              <span class="apply-form__type-label">
+                <strong>I'm a Distributor</strong>
+                <small>I want to join the distribution team</small>
+              </span>
+            </label>
+            <label class="apply-form__type-card">
+              <input type="radio" name="apply-type" value="business" />
+              <span class="apply-form__type-label">
+                <strong>I'm a Business</strong>
+                <small>I want to use distribution services</small>
+              </span>
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label for="apply-name">Name *</label>
+            <input type="text" id="apply-name" name="name" required maxlength="100" />
+          </div>
+
+          <div class="form-group">
+            <label for="apply-email">Email *</label>
+            <input type="email" id="apply-email" name="email" required maxlength="200" />
+          </div>
+
+          <div class="form-group">
+            <label for="apply-phone">Phone</label>
+            <input type="tel" id="apply-phone" name="phone" maxlength="30" />
+          </div>
+
+          <div class="form-group">
+            <label for="apply-location">Location</label>
+            <input type="text" id="apply-location" name="location" maxlength="100" placeholder="e.g. Athens, Thessaloniki" />
+          </div>
+
+          <div class="form-group">
+            <label for="apply-message">Message</label>
+            <textarea id="apply-message" name="message" maxlength="1000" rows="4"></textarea>
+          </div>
+
+          <div id="apply-error" class="error-msg" style="display: none;"></div>
+          <div id="apply-success" class="success-msg" style="display: none;"></div>
+
+          <button type="submit" class="btn btn--primary" id="apply-submit">Submit Application</button>
+        </form>
+      </div>
+    </section>
+
+    <footer class="page-footer">
+      &copy; 2026 advertisegr. All rights reserved.
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.97.0/dist/umd/supabase.min.js" integrity="sha384-1+ItoWbWcmVSm+Y+dJaUt4SEWNA21/jxef+Z0TSHHVy/dEUxEUEnZ1bHn6GT5hj+" crossorigin="anonymous"></script>
+    <script src="js/supabase-config.js"></script>
+    <script>
+      // ─── Application Form ───
+      (function () {
+        var form = document.getElementById('apply-form');
+        var errorEl = document.getElementById('apply-error');
+        var successEl = document.getElementById('apply-success');
+        var submitBtn = document.getElementById('apply-submit');
+        var honeypot = document.getElementById('hp-website');
+
+        // Strip HTML tags to prevent stored XSS
+        function sanitize(str) {
+          return str.replace(/<[^>]*>/g, '').trim();
+        }
+
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        form.addEventListener('submit', async function (e) {
+          e.preventDefault();
+          errorEl.style.display = 'none';
+          successEl.style.display = 'none';
+
+          // Honeypot check — silently reject bots
+          if (honeypot.value) {
+            successEl.textContent = 'Application submitted successfully!';
+            successEl.style.display = 'block';
+            form.reset();
+            return;
+          }
+
+          // Rate limiting — 30 second cooldown
+          var lastSubmit = sessionStorage.getItem('apply_ts');
+          if (lastSubmit && Date.now() - parseInt(lastSubmit, 10) < 30000) {
+            errorEl.textContent = 'Please wait before submitting again.';
+            errorEl.style.display = 'block';
+            return;
+          }
+
+          // Get and sanitize values
+          var typeEl = form.querySelector('input[name="apply-type"]:checked');
+          if (!typeEl) {
+            errorEl.textContent = 'Please select distributor or business.';
+            errorEl.style.display = 'block';
+            return;
+          }
+
+          var name = sanitize(document.getElementById('apply-name').value);
+          var email = sanitize(document.getElementById('apply-email').value);
+          var phone = sanitize(document.getElementById('apply-phone').value);
+          var location = sanitize(document.getElementById('apply-location').value);
+          var message = sanitize(document.getElementById('apply-message').value);
+          var type = typeEl.value;
+
+          if (!name) {
+            errorEl.textContent = 'Name is required.';
+            errorEl.style.display = 'block';
+            return;
+          }
+
+          if (!email || !emailRegex.test(email)) {
+            errorEl.textContent = 'Please enter a valid email address.';
+            errorEl.style.display = 'block';
+            return;
+          }
+
+          // Submit
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Submitting...';
+
+          var { error } = await db.from('applications').insert({
+            name: name,
+            email: email,
+            phone: phone || null,
+            type: type,
+            message: message || null,
+            location: location || null
+          });
+
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit Application';
+
+          if (error) {
+            errorEl.textContent = 'Something went wrong. Please try again.';
+            errorEl.style.display = 'block';
+            return;
+          }
+
+          sessionStorage.setItem('apply_ts', Date.now().toString());
+          successEl.textContent = 'Application submitted successfully! We will be in touch.';
+          successEl.style.display = 'block';
+          form.reset();
+        });
+      })();
+    </script>
+  </body>
+</html>

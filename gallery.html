@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <title>Gallery | advertisegr</title>
+    <meta name="description" content="Photos and documentation from our leaflet distribution work across Greece." />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="stylesheet" href="css/pages.css" />
+  </head>
+  <body>
+    <nav class="page-nav">
+      <a href="index.html" class="page-nav__brand">advertisegr</a>
+      <div class="page-nav__links">
+        <a href="campaigns.html">Campaigns</a>
+        <a href="gallery.html" class="active">Gallery</a>
+        <a href="work.html">Work</a>
+      </div>
+    </nav>
+
+    <header class="page-header">
+      <h1>Gallery</h1>
+      <p>Photos and documentation from our distribution work.</p>
+    </header>
+
+    <main class="page-content">
+      <div id="gallery-loading" class="loading"></div>
+      <div id="gallery-grid" class="masonry" style="display: none;"></div>
+      <div id="gallery-empty" class="empty-state" style="display: none;">
+        <div class="empty-state__icon">--</div>
+        <p>No photos yet. Check back soon!</p>
+      </div>
+    </main>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+      <button class="lightbox__close" aria-label="Close">&times;</button>
+      <img id="lightbox-img" src="" alt="" />
+    </div>
+
+    <footer class="page-footer">
+      &copy; 2026 advertisegr. All rights reserved.
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.97.0/dist/umd/supabase.min.js" integrity="sha384-1+ItoWbWcmVSm+Y+dJaUt4SEWNA21/jxef+Z0TSHHVy/dEUxEUEnZ1bHn6GT5hj+" crossorigin="anonymous"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/cache.js"></script>
+    <script>
+      // Validate URLs to prevent javascript: protocol injection
+      function sanitizeUrl(url) {
+        if (!url) return '';
+        try {
+          var parsed = new URL(url);
+          if (parsed.protocol === 'https:' || parsed.protocol === 'http:') {
+            return parsed.href;
+          }
+        } catch (e) {}
+        return '';
+      }
+
+      (async function () {
+        var grid = document.getElementById('gallery-grid');
+        var loading = document.getElementById('gallery-loading');
+        var empty = document.getElementById('gallery-empty');
+        var lightbox = document.getElementById('lightbox');
+        var lightboxImg = document.getElementById('lightbox-img');
+
+        var data = cacheGet('gallery_items');
+        var error = null;
+
+        if (!data) {
+          var result = await db
+            .from('gallery_items')
+            .select('*')
+            .order('created_at', { ascending: false });
+          data = result.data;
+          error = result.error;
+          if (data && data.length > 0) {
+            cacheSet('gallery_items', data, 5);
+          }
+        }
+
+        loading.style.display = 'none';
+
+        if (error || !data || data.length === 0) {
+          empty.style.display = 'block';
+          return;
+        }
+
+        data.forEach(function (item) {
+          var el = document.createElement('div');
+          el.className = 'masonry__item';
+
+          var safeUrl = sanitizeUrl(item.image_url);
+
+          var img = document.createElement('img');
+          img.src = safeUrl;
+          img.alt = item.title || '';
+          img.loading = 'lazy';
+          el.appendChild(img);
+
+          var overlay = document.createElement('div');
+          overlay.className = 'masonry__overlay';
+
+          var h3 = document.createElement('h3');
+          h3.textContent = item.title || '';
+          overlay.appendChild(h3);
+
+          if (item.description) {
+            var p = document.createElement('p');
+            p.textContent = item.description;
+            overlay.appendChild(p);
+          }
+
+          if (item.category) {
+            var badge = document.createElement('span');
+            badge.className = 'masonry__badge';
+            badge.textContent = item.category;
+            overlay.appendChild(badge);
+          }
+
+          el.appendChild(overlay);
+
+          el.addEventListener('click', function () {
+            lightboxImg.src = safeUrl;
+            lightboxImg.alt = item.title || '';
+            lightbox.classList.add('active');
+          });
+
+          grid.appendChild(el);
+        });
+
+        grid.style.display = '';
+
+        // Close lightbox
+        lightbox.addEventListener('click', function (e) {
+          if (e.target === lightbox || e.target.classList.contains('lightbox__close')) {
+            lightbox.classList.remove('active');
+          }
+        });
+
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') lightbox.classList.remove('active');
+        });
+      })();
+    </script>
+  </body>
+</html>

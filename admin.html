@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <title>Admin | advertisegr</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="stylesheet" href="css/pages.css" />
+  </head>
+  <body>
+    <!-- Login Screen -->
+    <div id="login-screen">
+      <div class="login-container">
+        <h1>Admin Panel</h1>
+        <p>Sign in to manage your content.</p>
+        <form id="login-form">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" required autocomplete="email" />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" required autocomplete="current-password" />
+          </div>
+          <div id="login-error" class="error-msg" style="display: none;"></div>
+          <button type="submit" class="btn btn--primary" style="margin-top: 1rem;">Sign In</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Admin Dashboard (hidden until login) -->
+    <div id="admin-dashboard" style="display: none;">
+      <header class="admin-header">
+        <span class="admin-header__title">advertisegr Admin</span>
+        <div class="admin-header__user">
+          <span id="admin-email"></span>
+          <button class="btn btn--ghost btn--small" id="logout-btn">Logout</button>
+        </div>
+      </header>
+
+      <div class="admin-tabs">
+        <button class="admin-tabs__tab active" data-tab="campaigns">Campaigns</button>
+        <button class="admin-tabs__tab" data-tab="gallery">Gallery</button>
+        <button class="admin-tabs__tab" data-tab="applications">Applications</button>
+      </div>
+
+      <div class="admin-content">
+        <!-- Campaigns Panel -->
+        <div class="admin-panel active" id="panel-campaigns">
+          <div class="admin-panel__header">
+            <h2>Campaigns</h2>
+            <button class="btn btn--primary btn--small" data-action="add" data-table="campaigns">+ Add New</button>
+          </div>
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="table-campaigns"></tbody>
+          </table>
+          <div id="empty-campaigns" class="empty-state" style="display: none;">
+            <p>No campaigns yet. Click "Add New" to create one.</p>
+          </div>
+        </div>
+
+        <!-- Gallery Panel -->
+        <div class="admin-panel" id="panel-gallery">
+          <div class="admin-panel__header">
+            <h2>Gallery</h2>
+            <button class="btn btn--primary btn--small" data-action="add" data-table="gallery_items">+ Add New</button>
+          </div>
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="table-gallery_items"></tbody>
+          </table>
+          <div id="empty-gallery_items" class="empty-state" style="display: none;">
+            <p>No gallery items yet. Click "Add New" to create one.</p>
+          </div>
+        </div>
+
+        <!-- Applications Panel -->
+        <div class="admin-panel" id="panel-applications">
+          <div class="admin-panel__header">
+            <h2>Applications</h2>
+          </div>
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Type</th>
+                <th>Location</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="table-applications"></tbody>
+          </table>
+          <div id="empty-applications" class="empty-state" style="display: none;">
+            <p>No applications yet.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for Create/Edit -->
+    <div class="modal-overlay" id="modal-overlay">
+      <div class="modal">
+        <div class="modal__header">
+          <h3 id="modal-title">Add New</h3>
+          <button class="modal__close" id="modal-close">&times;</button>
+        </div>
+        <div class="modal__body">
+          <form id="item-form">
+            <input type="hidden" id="form-id" />
+            <input type="hidden" id="form-table" />
+
+            <div class="form-group">
+              <label for="form-title">Title</label>
+              <input type="text" id="form-title" required />
+            </div>
+
+            <div class="form-group">
+              <label for="form-description">Description</label>
+              <textarea id="form-description"></textarea>
+            </div>
+
+            <!-- Status (campaigns only) -->
+            <div class="form-group" id="field-status">
+              <label for="form-status">Status</label>
+              <select id="form-status">
+                <option value="draft">Draft</option>
+                <option value="published">Published</option>
+              </select>
+            </div>
+
+            <!-- Category (gallery only) -->
+            <div class="form-group" id="field-category" style="display: none;">
+              <label for="form-category">Category</label>
+              <input type="text" id="form-category" />
+            </div>
+
+            <!-- Image Upload -->
+            <div class="form-group">
+              <label>Image</label>
+              <div class="image-upload" id="image-upload-area">
+                <input type="file" id="form-image" accept="image/*" />
+                <span class="image-upload__label">Click or drag to upload an image</span>
+                <img class="image-upload__preview" id="image-preview" src="" alt="Preview" />
+              </div>
+            </div>
+
+            <div id="form-error" class="error-msg" style="display: none;"></div>
+            <div id="form-success" class="success-msg" style="display: none;"></div>
+          </form>
+        </div>
+        <div class="modal__footer">
+          <button class="btn btn--secondary" id="modal-cancel">Cancel</button>
+          <button class="btn btn--primary" id="modal-save">Save</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.97.0/dist/umd/supabase.min.js" integrity="sha384-1+ItoWbWcmVSm+Y+dJaUt4SEWNA21/jxef+Z0TSHHVy/dEUxEUEnZ1bHn6GT5hj+" crossorigin="anonymous"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/admin.js"></script>
+  </body>
+</html>

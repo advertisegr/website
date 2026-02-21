@@ -8,7 +8,7 @@
 
 ---
 
-## 🚀 About
+## About
 
 **advertisegr** is a modern, responsive landing page for a professional leaflet distribution service in Greece. This single-page website showcases a clean, minimalist design that perfectly matches the business's professional brand identity.
 
@@ -18,16 +18,16 @@
 - **Focus**: No printing services, online payments only, no physical store
 - **Target**: Small businesses and events across Greece
 
-## ✨ Features
+## Features
 
-### 🎨 Design & UX
+### Design & UX
 - **Clean, modern aesthetic** matching the logo's blue, white, and yellow color scheme
 - **Mobile-first responsive design** that works perfectly on all devices
 - **Minimalist layout** with plenty of white space for optimal readability
 - **Smooth animations** and hover effects for enhanced user experience
 - **Accessibility features** including reduced motion support and keyboard navigation
 
-### 📱 Responsive Sections
+### Responsive Sections
 - **Hero Section**: Eye-catching introduction with logo, headline, and call-to-action
 - **About Us**: Clear explanation of the service and business approach
 - **Services**: Three main service offerings with custom SVG icons
@@ -35,14 +35,14 @@
 - **Contact Form**: Professional quote request form with validation
 - **Footer**: Complete business information and legal compliance
 
-### 🛠️ Technical Features
+### Technical Features
 - **SEO Optimized**: Meta tags, semantic HTML, and proper heading structure
 - **Performance**: Optimized images, efficient CSS, and minimal JavaScript
 - **Form Handling**: Client-side validation with user-friendly feedback
 - **Smooth Scrolling**: Enhanced navigation experience
 - **Cross-browser Compatible**: Works on all modern browsers
 
-## 🎯 Design Philosophy
+## Design Philosophy
 
 The website design is carefully crafted to reflect the logo's aesthetic:
 - **Color Palette**: Primary blue (#2563eb), accent yellow (#fbbf24), clean whites and grays
@@ -50,7 +50,7 @@ The website design is carefully crafted to reflect the logo's aesthetic:
 - **Icons**: Custom SVG icons that complement the logo's style
 - **Layout**: Rounded corners and friendly design elements matching the logo
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 advertisegr/
@@ -61,7 +61,7 @@ advertisegr/
 └── README.md           # Project documentation
 ```
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 - Any modern web browser
@@ -88,7 +88,7 @@ php -S localhost:8000
 
 Then visit `http://localhost:8000` in your browser.
 
-## 🎨 Customization
+## Customization
 
 ### Colors
 The color scheme is defined in CSS custom properties in `style.css`:
@@ -111,7 +111,7 @@ The color scheme is defined in CSS custom properties in `style.css`:
 - Replace `logo.png` with your updated logo (maintain aspect ratio)
 - Recommended size: 200px width for desktop, automatically scales for mobile
 
-## 📱 Mobile Optimization
+## Mobile Optimization
 
 The website is built with a mobile-first approach:
 - **Responsive Grid**: Services and steps adapt to screen size
@@ -119,7 +119,7 @@ The website is built with a mobile-first approach:
 - **Fast Loading**: Optimized images and minimal resources for mobile networks
 - **Readable Text**: Proper font sizes and contrast ratios
 
-## 🔧 Browser Support
+## Browser Support
 
 - **Chrome** 60+
 - **Firefox** 60+
@@ -127,13 +127,13 @@ The website is built with a mobile-first approach:
 - **Edge** 79+
 - **Mobile browsers** (iOS Safari, Chrome Mobile, Samsung Internet)
 
-## 📊 Performance
+## Performance
 
 - **Lighthouse Score**: 95+ (Performance, Accessibility, Best Practices, SEO)
 - **Load Time**: < 2 seconds on 3G networks
 - **Bundle Size**: < 50KB total (HTML + CSS + JS)
 
-## 🤝 Contributing
+## Contributing
 
 This is a business website project. For updates or modifications:
 
@@ -142,11 +142,11 @@ This is a business website project. For updates or modifications:
 3. Keep the design consistent with the brand identity
 4. Validate HTML and CSS
 
-## 📄 License
+## License
 
 This project is proprietary to advertisegr business. All rights reserved.
 
-## 📞 Contact
+## Contact
 
 For business inquiries or website support:
 - **Email**: info@advertisegr.com
@@ -156,6 +156,6 @@ For business inquiries or website support:
 ---
 
 <div align="center">
-  <p>Built with ❤️ for professional leaflet distribution in Greece</p>
+  <p>Built for professional leaflet distribution in Greece</p>
   <img src="logo.png" alt="advertisegr" width="100">
 </div> # website

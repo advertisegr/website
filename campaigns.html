@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <title>Campaigns | advertisegr</title>
+    <meta name="description" content="Browse our leaflet distribution campaigns and success stories across Greece." />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="stylesheet" href="css/pages.css" />
+  </head>
+  <body>
+    <nav class="page-nav">
+      <a href="index.html" class="page-nav__brand">advertisegr</a>
+      <div class="page-nav__links">
+        <a href="campaigns.html" class="active">Campaigns</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="work.html">Work</a>
+      </div>
+    </nav>
+
+    <header class="page-header">
+      <h1>Campaigns</h1>
+      <p>Our leaflet distribution campaigns and success stories across Greece.</p>
+    </header>
+
+    <main class="page-content">
+      <div id="campaigns-loading" class="loading"></div>
+      <div id="campaigns-grid" class="cards-grid" style="display: none;"></div>
+      <div id="campaigns-empty" class="empty-state" style="display: none;">
+        <div class="empty-state__icon">--</div>
+        <p>No campaigns yet. Check back soon!</p>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      &copy; 2026 advertisegr. All rights reserved.
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.97.0/dist/umd/supabase.min.js" integrity="sha384-1+ItoWbWcmVSm+Y+dJaUt4SEWNA21/jxef+Z0TSHHVy/dEUxEUEnZ1bHn6GT5hj+" crossorigin="anonymous"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/cache.js"></script>
+    <script>
+      // Sanitize text to prevent XSS when used in text content
+      function sanitizeText(str) {
+        if (!str) return '';
+        var div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+      }
+
+      // Validate URLs to prevent javascript: protocol injection
+      function sanitizeUrl(url) {
+        if (!url) return '';
+        try {
+          var parsed = new URL(url);
+          if (parsed.protocol === 'https:' || parsed.protocol === 'http:') {
+            return parsed.href;
+          }
+        } catch (e) {}
+        return '';
+      }
+
+      (async function () {
+        var grid = document.getElementById('campaigns-grid');
+        var loading = document.getElementById('campaigns-loading');
+        var empty = document.getElementById('campaigns-empty');
+
+        var data = cacheGet('campaigns');
+        var error = null;
+
+        if (!data) {
+          var result = await db
+            .from('campaigns')
+            .select('*')
+            .eq('status', 'published')
+            .order('created_at', { ascending: false });
+          data = result.data;
+          error = result.error;
+          if (data && data.length > 0) {
+            cacheSet('campaigns', data, 5);
+          }
+        }
+
+        loading.style.display = 'none';
+
+        if (error || !data || data.length === 0) {
+          empty.style.display = 'block';
+          return;
+        }
+
+        data.forEach(function (item) {
+          var card = document.createElement('div');
+          card.className = 'card';
+
+          var safeUrl = sanitizeUrl(item.image_url);
+          if (safeUrl) {
+            var img = document.createElement('img');
+            img.className = 'card__image';
+            img.src = safeUrl;
+            img.alt = sanitizeText(item.title);
+            img.loading = 'lazy';
+            card.appendChild(img);
+          }
+
+          var body = document.createElement('div');
+          body.className = 'card__body';
+
+          var title = document.createElement('h2');
+          title.className = 'card__title';
+          title.textContent = item.title || '';
+
+          var text = document.createElement('p');
+          text.className = 'card__text';
+          text.textContent = item.description || '';
+
+          var meta = document.createElement('div');
+          meta.className = 'card__meta';
+          meta.textContent = new Date(item.created_at).toLocaleDateString('en-GB', {
+            day: 'numeric', month: 'short', year: 'numeric'
+          });
+
+          body.appendChild(title);
+          body.appendChild(text);
+          body.appendChild(meta);
+          card.appendChild(body);
+          grid.appendChild(card);
+        });
+
+        grid.style.display = 'grid';
+      })();
+    </script>
+  </body>
+</html>

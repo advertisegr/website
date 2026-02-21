@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>OK Promo | Διανομή Φυλλαδίων Αθήνα & Αττική - Αξιόπιστη Υπηρεσία</title>
   <meta name="description" content="Διανομή φυλλαδίων σε όλη την Αττική με αποδεδειγμένα αποτελέσματα. Γραμματοκιβώτια, πόρτα-πόρτα, επιχειρήσεις. Ζητήστε δωρεάν προσφορά: 210 300 77 16">
   <meta name="robots" content="index, follow">
@@ -128,11 +131,11 @@
       <div class="nav-links">
         <a href="index.html" class="active">Αρχική</a>
         <div class="dropdown">
-          <a href="services.html" class="dropdown-toggle">
+          <a href="services.html" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
             Υπηρεσίες
             <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z" fill="currentColor"/></svg>
           </a>
-          <div class="dropdown-menu">
+          <div class="dropdown-menu" role="menu">
             <a href="services.html">Διανομές φυλλαδίων</a>
             <a href="services.html#promo">Προωθητικές ενέργειες</a>
           </div>
@@ -354,29 +357,33 @@
       </div>
       <div class="standalone-form" data-animate="fade-up">
         <form class="contact-form">
+          <!-- Honeypot - hidden from real users, bots fill it -->
+          <div style="position:absolute;left:-9999px" aria-hidden="true">
+            <input type="text" name="website" tabindex="-1" autocomplete="off">
+          </div>
           <div class="form-group">
             <label for="name">Όνομα *</label>
-            <input type="text" id="name" name="name" placeholder="Το όνομά σας" required>
+            <input type="text" id="name" name="name" placeholder="Το όνομά σας" required maxlength="100">
           </div>
           <div class="form-group">
             <label for="phone">Τηλέφωνο *</label>
-            <input type="tel" id="phone" name="phone" placeholder="Το τηλέφωνό σας" required>
+            <input type="tel" id="phone" name="phone" placeholder="Το τηλέφωνό σας" required maxlength="30">
           </div>
           <div class="form-group">
             <label for="email">Email *</label>
-            <input type="email" id="email" name="email" placeholder="Το email σας" required>
+            <input type="email" id="email" name="email" placeholder="Το email σας" required maxlength="200">
           </div>
           <div class="form-group">
             <label for="business">Είδος επιχείρησης</label>
-            <input type="text" id="business" name="business" placeholder="π.χ. Εστιατόριο">
+            <input type="text" id="business" name="business" placeholder="π.χ. Εστιατόριο" maxlength="100">
           </div>
           <div class="form-group full-width">
             <label for="area">Περιοχή διανομής</label>
-            <input type="text" id="area" name="area" placeholder="π.χ. Κέντρο Αθήνας, Πειραιάς">
+            <input type="text" id="area" name="area" placeholder="π.χ. Κέντρο Αθήνας, Πειραιάς" maxlength="200">
           </div>
           <div class="form-group full-width">
             <label for="info">Πρόσθετες πληροφορίες</label>
-            <textarea id="info" name="info" placeholder="Γράψτε τυχόν πρόσθετες πληροφορίες..."></textarea>
+            <textarea id="info" name="info" placeholder="Γράψτε τυχόν πρόσθετες πληροφορίες..." maxlength="2000"></textarea>
           </div>
           <div class="consent-group">
             <input type="checkbox" id="consent" name="consent">
@@ -389,7 +396,7 @@
             <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
             Τα δεδομένα σας είναι ασφαλή και δεν κοινοποιούνται σε τρίτους.
           </div>
-          <div class="form-message"></div>
+          <div class="form-message" role="alert" aria-live="assertive" aria-atomic="true"></div>
         </form>
       </div>
     </div>
@@ -450,6 +457,6 @@
     <svg viewBox="0 0 24 24"><path d="M7 14l5-5 5 5z" fill="currentColor"/></svg>
   </button>
 
-  <script src="js/main.js"></script>
+  <script src="js/main.js" defer></script>
 </body>
 </html>

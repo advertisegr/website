@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Ποιοι Είμαστε - OK Promo | Εταιρεία Διανομής Φυλλαδίων Αθήνα</title>
   <meta name="description" content="Η OK Promo είναι μία αξιόπιστη εταιρεία διανομής φυλλαδίων στην Αθήνα. Πολυετής εμπειρία, 100% κάλυψη Αττικής. Γνωρίστε την ομάδα μας.">
   <meta name="robots" content="index, follow">
@@ -17,6 +20,7 @@
   <meta property="og:title" content="Ποιοι Είμαστε - OK Promo | Εταιρεία Διανομής Φυλλαδίων">
   <meta property="og:description" content="Αξιόπιστη εταιρεία διανομής φυλλαδίων στην Αθήνα με πολυετή εμπειρία. Γνωρίστε την ομάδα μας.">
   <meta property="og:url" content="https://okpromo.gr/about.html">
+        <meta property="og:image" content="https://okpromo.gr/images/og-image.jpg">
 
   <meta name="twitter:card" content="summary_large_image">
 
@@ -71,11 +75,11 @@
       <div class="nav-links">
         <a href="index.html">Αρχική</a>
         <div class="dropdown">
-          <a href="services.html" class="dropdown-toggle">
+          <a href="services.html" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
             Υπηρεσίες
             <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z" fill="currentColor"/></svg>
           </a>
-          <div class="dropdown-menu">
+          <div class="dropdown-menu" role="menu">
             <a href="services.html">Διανομές φυλλαδίων</a>
             <a href="services.html#promo">Προωθητικές ενέργειες</a>
           </div>
@@ -253,7 +257,7 @@
               <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
               Τα δεδομένα σας είναι ασφαλή και δεν κοινοποιούνται σε τρίτους.
             </div>
-            <div class="form-message"></div>
+            <div class="form-message" role="alert" aria-live="assertive" aria-atomic="true"></div>
           </form>
         </div>
       </div>
@@ -314,6 +318,6 @@
     <svg viewBox="0 0 24 24"><path d="M7 14l5-5 5 5z" fill="currentColor"/></svg>
   </button>
 
-  <script src="js/main.js"></script>
+  <script src="js/main.js" defer></script>
 </body>
 </html>
